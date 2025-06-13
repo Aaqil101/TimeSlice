@@ -11,7 +11,7 @@ sys.path = [str(plugindir / p) for p in paths] + sys.path
 
 # ----- Py Flow Launcher Modules -----
 from pyflowlauncher import Plugin, ResultResponse, send_results
-from pyflowlauncher.result import JsonRPCAction, Result
+from pyflowlauncher.result import Result
 from pyflowlauncher.settings import settings
 
 # ----- Configurable Constants -----
