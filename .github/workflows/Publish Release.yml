@@ -1,53 +1,53 @@
 name: Publish Release
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths-ignore:
-      - .github/workflows/*
+    workflow_dispatch:
+    push:
+        branches: [main]
+        paths-ignore:
+            - .github/workflows/*
 
 permissions:
-  contents: write
+    contents: write
 
 jobs:
-  publish:
-    runs-on: windows-latest
-    env:
-      python_ver: 3.11
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Python ${{ env.python_ver }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ env.python_ver }}
-
-      - name: Get version
-        id: version
-        uses: notiz-dev/github-action-json-property@release
-        with:
-          path: "plugin.json"
-          prop_path: "Version"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r ./requirements.txt -t ./lib
-
-      - name: Create ZIP file
-        shell: pwsh
-        run: |
-          # Exclude .github folder and other unnecessary files
-          $exclude = @('.git', '.github', '.gitignore', '*.zip')
-          Get-ChildItem -Path . -Exclude $exclude | Compress-Archive -DestinationPath .\TimeSlice.zip -Force
-
-      - name: Publish Release
-        if: success()
-        uses: softprops/action-gh-release@v1
-        with:
-          files: TimeSlice.zip
-          tag_name: v${{steps.version.outputs.prop}}
+    publish:
+        runs-on: windows-latest
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            python_ver: 3.11
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Set up Python ${{ env.python_ver }}
+              uses: actions/setup-python@v2
+              with:
+                  python-version: ${{ env.python_ver }}
+
+            - name: Get version
+              id: version
+              uses: notiz-dev/github-action-json-property@release
+              with:
+                  path: "plugin.json"
+                  prop_path: "Version"
+
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install -r ./requirements.txt -t ./lib
+
+            - name: Create ZIP file
+              shell: pwsh
+              run: |
+                  # Exclude .github folder and other unnecessary files
+                  $exclude = @('.git', '.github', '.gitignore', '*.zip')
+                  Get-ChildItem -Path . -Exclude $exclude | Compress-Archive -DestinationPath .\TimeSlice.zip -Force
+
+            - name: Publish Release
+              if: success()
+              uses: softprops/action-gh-release@v1
+              with:
+                  files: TimeSlice.zip
+                  tag_name: v${{steps.version.outputs.prop}}
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
