@@ -1,3 +1,13 @@
 {
-    "cSpell.words": ["Aaqil", "flowlauncher", "notiz", "softprops"]
+    "python.envFile": "${workspaceFolder}/.env",
+    "cSpell.words": [
+        "Aaqil",
+        "flowlauncher",
+        "Freepik",
+        "Mihimihi",
+        "notiz",
+        "plugindir",
+        "pyperclip",
+        "softprops"
+    ]
 }
