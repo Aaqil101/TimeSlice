@@ -2,14 +2,12 @@
     "$schema": "https://www.flowlauncher.com/schemas/plugin.schema.json",
     "ID": "b267a7e7-4828-464f-b388-b96563209ba6",
     "ActionKeywords": [
-        "thh",
-        "tmm",
-        "tss"
+        "ts"
     ],
     "Name": "TimeSlice",
     "Description": "Convert HH:MM:SS or HH:MM into decimal hours—fast, clean, and copied to clipboard instantly.",
     "Author": "Aaqil101",
-    "Version": "1.0.0",
+    "Version": "1.0.1",
     "Language": "python",
     "Website": "https://github.com/Aaqil101/TimeSlice",
     "IcoPath": "src\\app.png",

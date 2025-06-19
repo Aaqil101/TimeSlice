@@ -35,8 +35,8 @@ def convert_time(query: str, settings_dict: Dict[str, Any]) -> ResultResponse:
     """
     parts: list[int] = list(map(int, query.strip().split(":")))
     if len(parts) == 2:
-        h, m = parts
-        s = 0
+        m, s = parts
+        h = 0
     elif len(parts) == 3:
         h, m, s = parts
     else:
@@ -76,8 +76,8 @@ def query(query: str) -> ResultResponse:
         # Check for empty input
         if not query.strip():
             empty_result = Result(
-                Title="Enter time in HH:MM or HH:MM:SS format",
-                SubTitle="Example: 1:30 or 1:30:15",
+                Title="Enter time in MM:SS or HH:MM:SS format",
+                SubTitle="Example: 20:30 (20min 30sec) or 1:20:15 (1hr 20min 15sec)",
                 IcoPath=str(AppIcon),
             )
             return send_results([empty_result])
